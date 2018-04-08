@@ -1,14 +1,14 @@
-'use strict';
+'use strict'
 
-const sequelize = require('../utils/sequelize');
+const sequelize = require('../utils/sequelize')
 
-const User = require('./users');
-const Mark = require('./marks');
+const User = require('./users')
+const Mark = require('./marks')
 
-const schema = {};
+const schema = {}
 
-const Student = sequelize.define('Student', schema);
-Student.belongsTo(User);
-Student.hasMany(Mark);
+const Student = sequelize.define('Student', schema)
+Student.belongsTo(User)
+Student.hasMany(Mark)
 
-module.exports = Student;
+module.exports = Student

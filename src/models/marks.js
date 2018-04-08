@@ -1,14 +1,14 @@
-'use strict';
+'use strict'
 
-const sequelize = require('../utils/sequelize');
-const Sequelize = require('sequelize');
+const sequelize = require('../utils/sequelize')
+const Sequelize = require('sequelize')
 
 const schema = {
-    value: {
-        type: Sequelize.INTEGER
-    }
-};
+  value: {
+    type: Sequelize.INTEGER
+  }
+}
 
-const Mark = sequelize.define('Mark', schema);
+const Mark = sequelize.define('Mark', schema)
 
-module.exports = Mark;
+module.exports = Mark

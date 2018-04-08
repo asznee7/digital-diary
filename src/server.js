@@ -1,27 +1,32 @@
-'use strict';
+'use strict'
 
-const Express = require('express');
-const config = require('./config');
+const path = require('path')
+process.env['NODE_CONFIG_DIR'] = path.join(__dirname, 'config')
+
+const Express = require('express')
+const config = require('config')
 const {
-    initializerSequelize,
-    initializerModels,
-    initializerSeed
-} = require('./initializers');
+  initializerSequelize,
+  initializerModels,
+  initializerSeed
+} = require('./initializers')
 
-const main = async() => {
-    console.log('main');
+const main = async () => {
+  console.log('main')
 
-    const app = new Express();
+  const { port } = config.get('express')
 
-    await initializerSequelize();
-    await initializerModels();
-    await initializerSeed();
+  const app = new Express()
 
-    await new Promise((resolve, reject) => app
-        .listen(config.port, resolve)
-        .on('error', reject));
+  await initializerSequelize()
+  await initializerModels()
+  await initializerSeed()
 
-    console.log('main -> done');
-};
+  await new Promise((resolve, reject) => app
+    .listen(port, resolve)
+    .on('error', reject))
 
-main().catch(console.error);
+  console.log('main -> done')
+}
+
+main().catch(console.error)

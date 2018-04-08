@@ -1,14 +1,14 @@
-'use strict';
+'use strict'
 
-const sequelize = require('../utils/sequelize');
+const sequelize = require('../utils/sequelize')
 
 const initializerModels = async () => {
-    console.log('initializerModels');
+  console.log('initializerModels')
 
-    require('../models');
-    await sequelize.sync();
+  require('../models')
+  await sequelize.sync()
 
-    console.log('initializerModels -> done');
-};
+  console.log('initializerModels -> done')
+}
 
-module.exports = initializerModels;
+module.exports = initializerModels

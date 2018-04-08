@@ -1,43 +1,43 @@
-'use strict';
+'use strict'
 
-const Sequelize = require('sequelize');
-const sequelize = require('../utils/sequelize');
+const Sequelize = require('sequelize')
+const sequelize = require('../utils/sequelize')
 
 const schema = {
-    name: {
-        type: Sequelize.STRING
-    },
-    username: {
-        type: Sequelize.STRING,
-        unique: true,
-        allowNull: false
-    },
-    password:{
-        type: Sequelize.STRING(60),
-        allowNull: false
-    },
-    address: {
-        type: Sequelize.STRING
-    },
-    phone: {
-        type: Sequelize.STRING
-    }
-};
+  name: {
+    type: Sequelize.STRING
+  },
+  username: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false
+  },
+  password: {
+    type: Sequelize.STRING(60),
+    allowNull: false
+  },
+  address: {
+    type: Sequelize.STRING
+  },
+  phone: {
+    type: Sequelize.STRING
+  }
+}
 
 const options = {
-    indexes: [
-        {
-            fields: ['name']
-        },
-        {
-            fields: ['phone']
-        },
-        {
-            fields: ['username']
-        }
-    ]
-};
+  indexes: [
+    {
+      fields: ['name']
+    },
+    {
+      fields: ['phone']
+    },
+    {
+      fields: ['username']
+    }
+  ]
+}
 
-const User = sequelize.define('User', schema, options);
+const User = sequelize.define('User', schema, options)
 
-module.exports = User;
+module.exports = User
