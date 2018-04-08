@@ -1,3 +1,9 @@
+'use strict'
+
+const { raw } = require('config/raw')
+const { format, transports } = require('winston')
+const Sequelize = require('sequelize')
+
 module.exports = {
   express: {
     port: 3100
@@ -15,7 +21,7 @@ module.exports = {
         host: 'localhost',
         port: '5432',
         dialect: 'postgres',
-        logging: console.log,
+        operatorsAliases: Sequelize.Op,
         timezone: '+03:00',
         isolationLevel: 'READ COMMITTED',
         define: {
@@ -54,5 +60,31 @@ module.exports = {
         classes: ['Alpha', 'Bravo', 'Charlie']
       }
     }
-  }
+  },
+  loggers: raw({
+    app: {
+      level: 'debug',
+      format: format.combine(
+        format.splat(),
+        format.simple(),
+        format.timestamp(),
+        format.colorize(),
+        format.label({ label: 'app' }),
+        format.printf(({ message, timestamp, label, level }) => `${timestamp} [${label}] ${level}: ${message}`)
+      ),
+      transports: [new transports.Console()]
+    },
+    database: {
+      level: 'debug',
+      format: format.combine(
+        format.splat(),
+        format.simple(),
+        format.timestamp(),
+        format.colorize(),
+        format.label({ label: 'database' }),
+        format.printf(({ message, timestamp, label, level }) => `${timestamp} [${label}] ${level}: ${message}`)
+      ),
+      transports: [new transports.Console()]
+    }
+  })
 }

@@ -1,19 +1,20 @@
 'use strict'
 
 const sequelize = require('../utils/sequelize')
+const { app: loggerApp, database: loggerDatabase } = require('../utils/logger')
 
 const initializerSequelize = async () => {
-  console.log('initializerSequelize')
+  loggerApp.info('initializerSequelize')
 
   await sequelize.authenticate()
     .then(() => {
-      console.log('Connection has been established successfully.')
+      loggerDatabase.info('Connection has been established successfully.')
     })
     .catch(err => {
-      console.error('Unable to connect to the database:', err)
+      loggerDatabase.error('Unable to connect to the database: %j', err)
     })
 
-  console.log('initializerSequelize -> done')
+  loggerApp.info('initializerSequelize -> done')
 }
 
 module.exports = initializerSequelize

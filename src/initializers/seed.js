@@ -5,13 +5,14 @@ const {User, Subject, Class, Student, Teacher} = require('../models')
 const config = require('config').get('database').get('seed')
 const Chance = require('chance')
 const bcrypt = require('bcrypt')
+const { app: logger } = require('../utils/logger')
 
 const initializerSeed = async () => {
-  console.log('initializerSeed')
+  logger.info('initializerSeed')
 
   const usersNum = await User.count()
   if (usersNum) {
-    console.log('initializerSeed -> seed executed earlier')
+    logger.info('initializerSeed -> seed executed earlier')
     return
   }
 
@@ -86,7 +87,7 @@ const initializerSeed = async () => {
     }
   }
 
-  console.log('initializerSeed -> done')
+  logger.info('initializerSeed -> done')
 }
 
 module.exports = initializerSeed
