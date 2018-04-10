@@ -21,6 +21,8 @@ const options = {
 
 const Subject = sequelize.define('Subject', schema, options)
 Subject.hasMany(Teacher)
+Teacher.belongsTo(Subject)
 Subject.hasMany(Mark)
+Mark.belongsTo(Subject)
 
 module.exports = Subject

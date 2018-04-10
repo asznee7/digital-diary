@@ -10,5 +10,6 @@ const schema = {}
 const Student = sequelize.define('Student', schema)
 Student.belongsTo(User)
 Student.hasMany(Mark)
+Mark.belongsTo(Student)
 
 module.exports = Student

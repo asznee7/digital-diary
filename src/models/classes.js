@@ -20,5 +20,6 @@ const options = {
 
 const Class = sequelize.define('Class', schema, options)
 Class.hasMany(Student)
+Student.belongsTo(Class)
 
 module.exports = Class

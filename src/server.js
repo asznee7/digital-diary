@@ -8,7 +8,9 @@ const config = require('config')
 const {
   initializerSequelize,
   initializerModels,
-  initializerSeed
+  initializerSeed,
+  initializerMiddlewares,
+  initializerRoutes
 } = require('./initializers')
 const { app: logger } = require('./utils/logger')
 
@@ -21,6 +23,8 @@ const main = async () => {
   await initializerSequelize()
   await initializerModels()
   await initializerSeed()
+  await initializerMiddlewares(app)
+  await initializerRoutes(app)
 
   await new Promise((resolve, reject) => app
     .listen(port, resolve)
@@ -29,4 +33,4 @@ const main = async () => {
   logger.info('main -> done on %j', { port })
 }
 
-main().catch(err => logger.error('Uncaught exception %j', err))
+main().catch(err => logger.error('Uncaught exception %s', err))
