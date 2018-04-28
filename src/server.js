@@ -10,7 +10,8 @@ const {
   initializerModels,
   initializerSeed,
   initializerMiddlewares,
-  initializerRoutes
+  initializerRoutes,
+  initializerValidators
 } = require('./initializers')
 const { app: logger } = require('./utils/logger')
 
@@ -25,6 +26,7 @@ const main = async () => {
   await initializerSeed()
   await initializerMiddlewares(app)
   await initializerRoutes(app)
+  await initializerValidators()
 
   await new Promise((resolve, reject) => app
     .listen(port, resolve)
