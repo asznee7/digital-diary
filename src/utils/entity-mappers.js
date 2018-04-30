@@ -41,6 +41,27 @@ const mapClassExtended = ({ id, name, Students }) => {
   })
 }
 
+const { Teacher, Student } = require('../models')
+const config = require('config')
+const { InternalServerError } = require('../errors')
+const roles = config.get('security.roles')
+
+const mapUserRole = (modelInstance) => {
+  if (modelInstance instanceof Teacher) {
+    return roles.teacher
+  }
+  if (modelInstance instanceof Student) {
+    return roles.student
+  }
+  throw new InternalServerError('Unknown role')
+}
+
+const mapUserInfo = (modelInstance) => ({
+  id: modelInstance.id,
+  name: modelInstance.User.name,
+  role: mapUserRole(modelInstance)
+})
+
 module.exports = {
   mapSubjectCore,
   mapClassCore,
@@ -51,5 +72,7 @@ module.exports = {
   mapUserExtended,
   mapStudentCore,
   mapStudentExtended,
-  mapList
+  mapList,
+  mapUserRole,
+  mapUserInfo
 }

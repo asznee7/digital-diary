@@ -14,6 +14,21 @@ module.exports = {
     base: '/api',
     v1: '/v1'
   },
+  security: {
+    pepper: 'EMOQL9lTcF5RvE9aq2xh',
+    saltRounds: 10,
+    roles: {
+      teacher: 'teacher',
+      student: 'student'
+    },
+    cookie: {
+      name: 'auth',
+      config: {
+        httpOnly: true,
+        maxAge: 1800000
+      }
+    }
+  },
   database: {
     config: {
       name: undefined,

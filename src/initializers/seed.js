@@ -2,10 +2,12 @@
 
 const sequelize = require('../utils/sequelize')
 const {User, Subject, Class, Student, Teacher} = require('../models')
-const config = require('config').get('database').get('seed')
+const config = require('config').get('database.seed')
+const configSecurity = require('config').get('security')
 const Chance = require('chance')
 const bcrypt = require('bcrypt')
 const { app: logger } = require('../utils/logger')
+const { pepperAdd } = require('../utils/security')
 
 const initializerSeed = async () => {
   logger.info('initializerSeed')
@@ -43,8 +45,7 @@ const initializerSeed = async () => {
     for (let i = 0; i < initUsers.length; i++) {
       const user = await User.create({
         name: initUsers[i].name,
-        username: initUsers[i].name.replace(' ', '').toLowerCase(),
-        password: bcrypt.hashSync(initUsers[i].password, 10),
+        password: bcrypt.hashSync(pepperAdd(initUsers[i].password), configSecurity.saltRounds),
         address: chance.address(),
         phone: chance.phone()
       }, {transaction})

@@ -4,7 +4,7 @@ const { BAD_REQUEST } = require('http-status')
 
 const AbstractError = require('./abstract-error')
 
-class NotFoundError extends AbstractError {
+class BadRequest extends AbstractError {
   constructor ({ errors, message }) {
     super(message)
     this.status = BAD_REQUEST
@@ -12,4 +12,4 @@ class NotFoundError extends AbstractError {
   }
 }
 
-module.exports = NotFoundError
+module.exports = BadRequest

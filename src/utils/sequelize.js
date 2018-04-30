@@ -1,7 +1,7 @@
 'use strict'
 
 const Sequelize = require('sequelize')
-const config = require('config').get('database').get('config')
+const config = require('config').get('database.config')
 const { database: logger } = require('../utils/logger')
 config.options.logging = (msg) => logger.info(msg)
 
