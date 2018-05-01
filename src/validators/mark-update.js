@@ -11,15 +11,12 @@ const schema = {
           type: 'integer',
           maximum: 5,
           minimum: 2
-        },
-        student_id: {
-          type: 'integer'
         }
       },
-      required: ['value', 'student_id']
+      required: ['value']
     },
     params: {
-      $ref: 'emptyObject'
+      $ref: 'urlWithId'
     },
     query: {
       $ref: 'emptyObject'

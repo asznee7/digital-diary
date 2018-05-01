@@ -18,7 +18,8 @@ router.get('/',
 
     const subjectsFormatted = mapList(mapSubjectCore)(subjects)
     res.json(subjectsFormatted)
-  }))
+  })
+)
 
 router.get('/:id(\\d+)',
   checkAuthenticated(),
@@ -30,6 +31,7 @@ router.get('/:id(\\d+)',
     }
     const subjectFormatted = mapSubjectCore(subject)
     res.json(subjectFormatted)
-  }))
+  })
+)
 
 module.exports = router

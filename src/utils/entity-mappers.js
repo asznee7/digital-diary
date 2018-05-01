@@ -41,6 +41,16 @@ const mapClassExtended = ({ id, name, Students }) => {
   })
 }
 
+const dateFormat = require('dateformat')
+const mapMarkCore = ({ id, value, createdAt, Student, Subject }) => ({
+  id,
+  value,
+  date: dateFormat(createdAt, 'yyyy-mm-dd'),
+  student: mapStudentCore(Student),
+  class: mapClassCore(Student.Class),
+  subject: mapSubjectCore(Subject)
+})
+
 const { Teacher, Student } = require('../models')
 const config = require('config')
 const { InternalServerError } = require('../errors')
@@ -74,5 +84,6 @@ module.exports = {
   mapStudentExtended,
   mapList,
   mapUserRole,
-  mapUserInfo
+  mapUserInfo,
+  mapMarkCore
 }

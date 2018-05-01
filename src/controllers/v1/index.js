@@ -6,6 +6,7 @@ const classes = require('./classes')
 const subjects = require('./subjects')
 const security = require('./security')
 const users = require('./users')
+const marks = require('./marks')
 
 module.exports = {
   teachers,
@@ -13,5 +14,6 @@ module.exports = {
   classes,
   subjects,
   security,
-  users
+  users,
+  marks
 }

@@ -9,9 +9,8 @@ const router = new express.Router()
 router.get('/me',
   checkAuthenticated(),
   validateMiddleware('emptySchema'),
-  asyncMiddleware(async (req, res) => {
-    const authCookieData = req.authenticatedUser
-    const resFormatted = mapUserInfo(authCookieData)
+  asyncMiddleware(async ({ authenticatedUser }, res) => {
+    const resFormatted = mapUserInfo(authenticatedUser)
     res.json(resFormatted)
   })
 )

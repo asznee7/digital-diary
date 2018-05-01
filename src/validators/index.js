@@ -6,6 +6,7 @@ const emptySchema = require('./empty-schema')
 const markCreate = require('./mark-create')
 const urlWithId = require('./url-with-id')
 const login = require('./login')
+const markUpdate = require('./mark-update')
 
 module.exports = {
   emptyObject,
@@ -13,5 +14,6 @@ module.exports = {
   emptySchemaWithId,
   markCreate,
   urlWithId,
-  login
+  login,
+  markUpdate
 }

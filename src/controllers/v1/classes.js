@@ -18,7 +18,8 @@ router.get('/',
 
     const classesFormatted = mapList(mapClassCore)(classes)
     res.json(classesFormatted)
-  }))
+  })
+)
 
 router.get('/:id(\\d+)',
   checkAuthenticated(),
@@ -39,6 +40,7 @@ router.get('/:id(\\d+)',
     }
     const classFormatted = mapClassExtended(classEntity)
     res.json(classFormatted)
-  }))
+  })
+)
 
 module.exports = router

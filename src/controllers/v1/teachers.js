@@ -23,7 +23,8 @@ router.get('/',
 
     const teachersFormatted = mapList(mapTeacherCore)(teachers)
     res.json(teachersFormatted)
-  }))
+  })
+)
 
 router.get('/:id(\\d+)',
   checkAuthenticated([ Teacher ]),
@@ -42,6 +43,7 @@ router.get('/:id(\\d+)',
 
     const teacherFormatted = mapTeacherExtended(teacher)
     res.json(teacherFormatted)
-  }))
+  })
+)
 
 module.exports = router

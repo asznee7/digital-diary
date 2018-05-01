@@ -20,6 +20,7 @@
     "config": "^1.30.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
+    "dateformat": "^3.0.3",
     "express": "^4.16.3",
     "http-status": "^1.0.1",
     "pg": "^7.4.1",
