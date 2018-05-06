@@ -6,7 +6,7 @@ const Sequelize = require('sequelize')
 
 module.exports = {
   express: {
-    port: 3100,
+    port: 3000,
     limit: '10mb'
   },
   api: {
