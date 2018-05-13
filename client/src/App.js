@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import store from './store'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from './components/Login'
+import Main from './components/Main'
 
 class App extends Component {
   render() {
