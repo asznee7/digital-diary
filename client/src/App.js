@@ -4,15 +4,15 @@ import { Provider } from 'react-redux'
 import store from './store'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from './components/Login'
-import Main from './components/Main'
+import Page from './components/Page'
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
         <Router>
-          <div>
-            <Route exact path="/" component={Main}/>
+          <div className='app'>
+            <Route exact path="/" component={Page}/>
             <Route exact path="/login" component={Login} />
           </div>
         </Router>
