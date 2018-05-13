@@ -3,7 +3,7 @@ import './App.css';
 import { Provider } from 'react-redux'
 import store from './store'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Login from './components/login'
+import Login from './components/Login'
 
 class App extends Component {
   render() {
@@ -11,7 +11,7 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div>
-            <Route exact path="/" render={() => { return (<div>main page</div>)}}/>
+            <Route exact path="/" component={Main}/>
             <Route exact path="/login" component={Login} />
           </div>
         </Router>

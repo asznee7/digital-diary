@@ -24,3 +24,7 @@ input[type="password"] {
 input[type="submit"] {
     margin: 0;
 }
+
+.displayErrors input:invalid {
+    border-color: #ff4343;
+}
