@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import styles from './App.css';
 import { Provider } from 'react-redux'
 import store from './store'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <div className='app'>
+          <div className={styles.app}>
             <Route exact path="/" component={Page}/>
             <Route exact path="/login" component={Login} />
           </div>

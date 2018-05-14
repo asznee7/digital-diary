@@ -1,5 +1,5 @@
-import './Login.css'
 import React, { Component } from 'react';
+import styles from './Login.css'
 import { connect } from 'react-redux'
 import { login } from '../actions/authActions'
 import PropTypes from 'prop-types'
@@ -27,26 +27,22 @@ class Login extends Component {
     const { displayErrors } = this.state;
     return (
       <div>
-        <section className='header'>
-          <h3>Sign in to Digital Diary</h3>
-        </section>
-        <section>
-          <form onSubmit={(e) => this.onLoginClick(e)}
-                className={displayErrors ? 'displayErrors' : ''}
-                noValidate>
-            <label>Username</label>
-            <input type='text'
-                   name='login'
-                   required/>
-            <label>Password</label>
-            <input type='password'
-                   name='password'
-                   required/>
-            <input className='button-primary submit'
-                   type='submit'
-                   value='Sign in'/>
-          </form>
-        </section>
+        <h3 className={styles.header}>Sign in to Digital Diary</h3>
+        <form onSubmit={(e) => this.onLoginClick(e)}
+              className={displayErrors ? styles.displayErrors : ''}
+              noValidate>
+          <label>Username</label>
+          <input type='text'
+                 name='login'
+                 required/>
+          <label>Password</label>
+          <input type='password'
+                 name='password'
+                 required/>
+          <input className='button-primary submit'
+                 type='submit'
+                 value='Sign in'/>
+        </form>
       </div>
     );
   }

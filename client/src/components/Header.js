@@ -1,11 +1,11 @@
-import './Header.css'
+import styles from './Header.css'
 import React, { Component } from 'react'
 
 class Header extends Component{
   render() {
     return (
-      <div>
-        <h4>Digital Diary</h4>
+      <div className={styles.header}>
+        <h5>Digital Diary</h5>
         <div>
           <span>User Example</span>
           <a href='#'>Logout</a>
