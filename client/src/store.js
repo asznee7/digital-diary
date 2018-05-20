@@ -1,19 +1,17 @@
-import { applyMiddleware, createStore, compose } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
-import { combineReducers } from 'redux'
-import authReducer from './reducers/authReducer'
+import logger from 'redux-logger'
+import rootReducer, { middleware, enhancer } from './reducers'
 
 const initialState = {}
-const middleware = [thunk]
 
 const store = createStore(
-  combineReducers({
-    authReducer
-  }),
+  rootReducer,
   initialState,
-  compose(
-    applyMiddleware(...middleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeWithDevTools(
+    enhancer,
+    applyMiddleware(thunk, middleware, logger)
   ))
 
 export default store

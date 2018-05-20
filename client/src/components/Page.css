@@ -1,5 +1,0 @@
-.pageContainer{
-    display: grid;
-    grid-template-rows: 100px minmax(200px, auto);
-    height: 100%;
-}

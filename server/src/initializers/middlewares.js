@@ -13,7 +13,10 @@ const initializerMiddlewares = (app) => {
   logger.info('initializerMiddlewares %j', {limit})
 
   app.use(bodyParser.json({ limit }))
-  app.use(cors())
+  app.use(cors({
+    origin: 'http://localhost:3001',
+    credentials: true
+  }))
 
   app.use(cookieParser())
 

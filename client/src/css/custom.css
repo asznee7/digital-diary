@@ -2,6 +2,25 @@ html, body, #root{
     height: 100%;
 }
 
-body {
-    background-color: #f5fbff;
+html {
+    background-color: #f9f9f9;
+}
+
+input[type="submit"].button-primary[disabled]{
+    background: #ccc;
+    border-color: #ccc;
+    text-shadow: none;
+}
+
+input[type="submit"].button-primary[disabled]:hover{
+    background: #ccc;
+    border-color: #ccc;
+    text-shadow: none;
+    cursor: wait;
+}
+
+.pageContainer{
+    display: grid;
+    grid-template-rows: 100px minmax(200px, auto);
+    height: 100%;
 }
