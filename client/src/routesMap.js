@@ -1,21 +1,26 @@
-import { redirect } from 'redux-first-router'
 import classes from './thunks/classes'
 
 export default {
   FORBIDDEN: '/forbidden',
-  LOGIN: '/login',
+  LOGIN: {
+    path:'/login',
+    thunk: (dispatch, getState) => {}
+  },
+  MAIN: {
+    path: '/',
+    thunk: (dispatch, getState) => {}
+  },
   CLASSES: {
     path: '/classes',
     thunk: (dispatch, getState) => {
       dispatch(classes.getClasses())
     }
   },
-  MAIN: {
-    path: '/',
+  CLASS: {
+    path: '/classes/:id',
     thunk: (dispatch, getState) => {
-      //
-      //const { me } = getState()
-      //if(!me.data) dispatch(redirect({ type: 'LOGIN'}))
+      const { id } = getState().location.payload
+      dispatch(classes.getClass(id))
     }
-  }
+  },
 }

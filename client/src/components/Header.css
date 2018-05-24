@@ -1,0 +1,28 @@
+.logo > h3 {
+    margin: 0;
+}
+
+.logo, .userAction, .menu {
+    cursor: pointer;
+}
+
+.menu > span:hover {
+    color: #26adff;
+}
+
+.menu {
+    font-size: 16px;
+}
+
+.userInfo {
+    margin: 0 20px;
+    color: #007afb;
+    font-weight: bold;
+}
+
+.userAction {
+    margin: 0;
+    padding: 0 12px;
+    height: 30px;
+    line-height: 30px;
+}

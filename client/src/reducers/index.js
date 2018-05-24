@@ -6,7 +6,7 @@ import createHistory from 'history/createBrowserHistory'
 import routesMap from '../routesMap'
 import page from './page'
 import me from './me'
-import classes from './classes'
+import { classes, oneClass} from './classes'
 
 const history = createHistory()
 
@@ -17,7 +17,8 @@ const rootReducer = combineReducers({
   location: reducer,
   page,
   me,
-  classes
+  classes,
+  class: oneClass
 })
 
 export default rootReducer

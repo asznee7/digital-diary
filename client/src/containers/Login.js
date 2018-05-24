@@ -7,10 +7,14 @@ import security from '../thunks/security'
 import { renderField } from '../utils/common'
 import styles from './Login.css'
 import { XIcon } from 'react-octicons'
+import { redirect } from 'redux-first-router'
 
 const mapDispatchToProps = (dispatch) => ({
+  redirectToMain: () => dispatch(redirect({ type: 'MAIN'})),
   login: (credentials, resolve, reject) => dispatch(security.login(credentials, resolve, reject))
 })
+
+const mapStateToProps = ({ me }) => ({ me })
 
 class Login extends React.Component {
   constructor(props) {
@@ -19,6 +23,13 @@ class Login extends React.Component {
       showError: true
     }
     console.log(this.props)
+  }
+
+  static getDerivedStateFromProps(nextProps){
+    console.log('nextProps MEEEEE', nextProps.me)
+    if (nextProps.me.data)
+      nextProps.redirectToMain()
+    return null
   }
 
   submit = (values) => {
@@ -55,7 +66,7 @@ class Login extends React.Component {
     return (
       <div>
         <h3 className={styles.header}>Sign in to Digital Diary</h3>
-        {this.state.showError && error &&
+        { error && !submitting && this.state.showError &&
           <div className={styles.errorMessage} ref={this.errorMessage}>
             {error}
             <XIcon onClick={this.removeErrorMessage} className={styles.icon}/>
@@ -84,7 +95,8 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  login: PropTypes.func.isRequired
+  login: PropTypes.func.isRequired,
+  redirectToMain: PropTypes.func.isRequired
 }
 
-export default reduxForm({ form: 'login' })(connect(null, mapDispatchToProps)(Login))
+export default reduxForm({ form: 'login' })(connect(mapStateToProps, mapDispatchToProps)(Login))

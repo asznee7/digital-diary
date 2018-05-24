@@ -1,0 +1,17 @@
+.classContainer{
+    font-size: 20px;
+}
+
+.classRow {
+    padding: 10px 30px;
+    border-bottom: 1px solid #dadada;
+    cursor: pointer;
+}
+
+.classRow:hover {
+    background-color: #bae3fbc9;
+}
+
+.classRow:last-child{
+    border-bottom: 0;
+}

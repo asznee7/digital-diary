@@ -12,6 +12,7 @@ const store = createStore(
   composeWithDevTools(
     enhancer,
     applyMiddleware(thunk, middleware, logger)
-  ))
+  )
+)
 
 export default store
