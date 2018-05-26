@@ -47,7 +47,7 @@ class Header extends Component {
         </div>
         <div className={styles.user}>
           <span className={styles.userInfo}>{this.props.me.data && this.props.me.data.name}</span>
-          <button className={styles.userAction} onClick={this.props.logout}>Logout</button>
+          <button className={styles.userAction} onClick={() => this.props.logout()}>Logout</button>
         </div>
       </div>
     )

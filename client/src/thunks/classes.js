@@ -8,10 +8,10 @@ import {
 } from '../actions/classes'
 import classes from '../api/classes'
 
-const getClasses = () => dispatch => {
+const getClasses = (classesIds) => dispatch => {
   dispatch(getClassesRequest())
   classes.getClasses()
-    .then(response => dispatch(getClassesSuccess(response.data)))
+    .then(response => dispatch(getClassesSuccess(response.data, classesIds)))
     .catch((e) => dispatch(getClassesFailure(e)))
 }
 

@@ -22,11 +22,9 @@ class Login extends React.Component {
     this.state = {
       showError: true
     }
-    console.log(this.props)
   }
 
   static getDerivedStateFromProps(nextProps){
-    console.log('nextProps MEEEEE', nextProps.me)
     if (nextProps.me.data)
       nextProps.redirectToMain()
     return null

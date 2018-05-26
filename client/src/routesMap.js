@@ -1,4 +1,5 @@
 import classes from './thunks/classes'
+import marks from './thunks/marks'
 
 export default {
   FORBIDDEN: '/forbidden',
@@ -8,12 +9,13 @@ export default {
   },
   MAIN: {
     path: '/',
-    thunk: (dispatch, getState) => {}
+    thunk: (dispatch, getState) => {
+    }
   },
   CLASSES: {
     path: '/classes',
     thunk: (dispatch, getState) => {
-      dispatch(classes.getClasses())
+      dispatch(marks.getMarks())
     }
   },
   CLASS: {

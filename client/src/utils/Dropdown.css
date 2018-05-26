@@ -1,0 +1,32 @@
+.dropdownWrapper {
+    display: inline-block;
+}
+
+.dropdownMenu {
+    position: absolute;
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 5px #ccc;
+    background-clip: padding-box;
+    z-index: 1;
+}
+
+.dropdownMenuItem {
+    position: relative;
+    display: block;
+    padding: 7px 15px 7px 12px;
+    font-size: 16px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.dropdownMenuItem:hover{
+    background-color: #ebfaff;
+}
+
+.dropDownSwitcher {
+   cursor: pointer;
+}

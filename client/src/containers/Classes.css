@@ -9,9 +9,13 @@
 }
 
 .classRow:hover {
-    background-color: #bae3fbc9;
+    background-color: #e4f5ffc9;
 }
 
 .classRow:last-child{
     border-bottom: 0;
+}
+
+i {
+    background-color: aliceblue;
 }

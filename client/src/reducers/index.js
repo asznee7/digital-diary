@@ -6,19 +6,37 @@ import createHistory from 'history/createBrowserHistory'
 import routesMap from '../routesMap'
 import page from './page'
 import me from './me'
-import { classes, oneClass} from './classes'
+import { classes, oneClass } from './classes'
+import { students, student } from './students'
+import { marks, mark, postMark, putMark } from './marks'
+import { teachers, teacher } from './teachers'
 
 const history = createHistory()
 
 export const { reducer, middleware, enhancer } = connectRoutes(history, routesMap)
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   form: formReducer,
   location: reducer,
   page,
   me,
   classes,
-  class: oneClass
+  class: oneClass,
+  students,
+  student,
+  marks,
+  mark,
+  lastSentMark: postMark,
+  lastUpdatedMark: putMark,
+  teachers,
+  teacher
 })
+
+const rootReducer = (state, action) => {
+  if(action.type === 'LOGOUT_SUCCESS'){
+    state = undefined
+  }
+  return appReducer(state, action)
+}
 
 export default rootReducer

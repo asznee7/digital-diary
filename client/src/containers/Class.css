@@ -1,0 +1,43 @@
+.tableWrapper {
+    /*display: flex;
+    flex-flow: row nowrap;*/
+    overflow-x: auto;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table td {
+    max-width: 30px;
+}
+
+table > thead th {
+    white-space: nowrap;
+}
+
+.nameColumn {
+    min-width: 70px;
+}
+
+.addMarkColumn {
+    width: 70px;
+}
+
+.addMarkButton{
+    padding: 0;
+    display: flex;
+    width: 40px;
+    height: 40px;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.addMarkButton > svg {
+    fill: white;
+}
+
+tbody > tr:hover {
+    background-color: #e4f5ffc9;
+}

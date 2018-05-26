@@ -42,10 +42,10 @@ const mapClassExtended = ({ id, name, Students }) => {
 }
 
 const dateFormat = require('dateformat')
-const mapMarkCore = ({ id, value, createdAt, Student, Subject }) => ({
+const mapMarkCore = ({ id, value, created_at, Student, Subject }) => ({
   id,
   value,
-  date: dateFormat(createdAt, 'yyyy-mm-dd'),
+  date: dateFormat(created_at, 'yyyy-mm-dd'),
   student: mapStudentCore(Student),
   class: mapClassCore(Student.Class),
   subject: mapSubjectCore(Subject)

@@ -9,7 +9,7 @@ export const {
   getClassFailure
 } = createActions({
   GET_CLASSES_REQUEST: undefined,
-  GET_CLASSES_SUCCESS: payload => payload,
+  GET_CLASSES_SUCCESS: (payload, classesIds) => ({ payload, classesIds }),
   GET_CLASSES_FAILURE: payload => payload,
   GET_CLASS_REQUEST: undefined,
   GET_CLASS_SUCCESS: payload => payload,
