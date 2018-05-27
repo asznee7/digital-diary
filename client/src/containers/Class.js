@@ -5,58 +5,73 @@ import styles from './Class.css'
 import { PlusIcon } from 'react-octicons'
 import Dropdown from '../utils/Dropdown'
 import marks from '../thunks/marks'
+import routesActions from '../actions/routes'
 
-const mapStateToProps = ({ class: loadedClass, marks, teacher }) => ({ loadedClass, marks, teacher })
+const mapStateToProps = ({ class: loadedClass, marks, teacher, me}) => ({ loadedClass, marks, teacher, me })
 const mapDispatchToProps = dispatch => ({
   postMark: (data) => dispatch(marks.postMark(data)),
-  putMark: (id, data) => dispatch(marks.putMark(id, data))
+  putMark: (id, data) => dispatch(marks.putMark(id, data)),
+  goToForbidden: () => dispatch(routesActions.goToForbidden())
 })
 
 class Class extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      uniqueDates: [],
-      mappedClassStudents: [],
+      dates: [],
+      filteredStudents: [],
+      loadedClass: {},
       searchData: ''
     }
   }
 
   static getDerivedStateFromProps(nextProps, prevState){
-    if (nextProps.loadedClass.data) {
+    if (nextProps.loadedClass.data && nextProps.marks.data && nextProps.teacher.data) {
       return Class.getMarksTable(nextProps, prevState)
+    }
+    if (nextProps.me.data && nextProps.me.data.role !== 'teacher') {
+      nextProps.goToForbidden()
+      return null
     }
     return null
   }
 
   onChange = (e) => {
     const { students } = this.props.loadedClass.data
-    let newlyDisplayed = students
+    let filteredStudents = students
       .filter(entity => entity.name.toLowerCase().includes(e.target.value.toLowerCase()))
       .sort((a, b) => a.name.toUpperCase() < b.name.toUpperCase() ?  -1 :  1)
     this.setState({
       searchData: e.target.value,
-      mappedClassStudents: newlyDisplayed
+      filteredStudents
     })
   }
 
   static getMarksTable = (props, state) => {
-    const { loadedClass, marks, teacher } = props
-    const classStudents = loadedClass.data.students.map(student => student.id)
-    let neededMarks = marks.data.entities
-      .filter(mark => classStudents.includes(mark.student.id))
-      .filter(mark => loadedClass.data.id === mark.class.id)
-      .filter(mark => teacher.data.subject.id === mark.subject.id)
+    const {
+      loadedClass: { data: loadedClass },
+      marks: { data: { entities: marks }},
+      teacher: { data: teacher}
+    } = props
+
+    const classStudentsIds = loadedClass.students.map(student => student.id)
+    let filteredMarks = marks
+      .filter(mark =>
+        classStudentsIds.includes(mark.student.id) &&
+        loadedClass.id === mark.class.id &&
+        teacher.subject.id === mark.subject.id
+      )
       .sort((a, b) => a.id - b.id)
-    let mappedClassStudents = loadedClass.data.students.slice(0)
+    let filteredStudents = loadedClass.students
       .filter(student => student.name.toLowerCase().includes(state.searchData.toLowerCase()))
-    mappedClassStudents
       .sort((a, b) => a.name.toUpperCase() < b.name.toUpperCase() ?  -1 :  1)
       .map(student => {
-      student.studentMarks = neededMarks.filter(mark => student.id === mark.student.id)
-    })
-    let uniqueDates = [...new Set(neededMarks.map(mark => mark.date))]
-    return { uniqueDates, mappedClassStudents }
+        student.marks = filteredMarks.filter(mark => student.id === mark.student.id)
+        return student
+      })
+    let dates = [...new Set(filteredMarks.map(mark => mark.date))]
+    
+    return { dates, filteredStudents, loadedClass }
   }
 
   addMark = (value, student_id) => {
@@ -67,16 +82,16 @@ class Class extends React.Component {
     this.props.putMark(id, { value })
   }
 
+  renderRows = (dates, filteredStudents, loadedClass) => {
+    if (!dates || filteredStudents || loadedClass) return null
+  }
+
   render () {
-    const { loadedClass } = this.props
-    if (!loadedClass.data)
-      return null
-
-    const { uniqueDates, mappedClassStudents } = this.state
-
+    console.log(this.state)
+    const { dates, filteredStudents, loadedClass } = this.state
     return (
       <div>
-        <h5><strong>{this.props.loadedClass.data.name}</strong> class students:</h5>
+        <h5><strong>{loadedClass.name}</strong> class students:</h5>
         <input type='text' className='u-full-width' placeholder='Search...' onChange={(e) => this.onChange(e)}/>
          <div className={styles.tableWrapper}>
            <table className="u-full-width">
@@ -84,12 +99,12 @@ class Class extends React.Component {
              <tr>
                <th className={styles.addMarkColumn}>Add mark</th>
                <th className={styles.nameColumn}>Name</th>
-               { uniqueDates && uniqueDates.map(date => <th key={date}>{date}</th>)}
+               { dates && dates.map(date => <th key={date}>{date}</th>)}
              </tr>
              </thead>
              <tbody>
              {
-               mappedClassStudents && mappedClassStudents.map(student =>
+               filteredStudents && filteredStudents.map(student =>
                  <tr key={student.id}>
                    <td style={{textAlign: 'center'}}>
                      <Dropdown items={[2, 3, 4, 5]}
@@ -102,9 +117,9 @@ class Class extends React.Component {
                    </td>
                    <td>{student.name}</td>
                    {
-                     uniqueDates && uniqueDates.map(date =>
+                     dates && dates.map(date =>
                        <td key={date}><div>
-                         { student.studentMarks && student.studentMarks
+                         { student.marks && student.marks
                            .filter(mark => mark.date === date)
                            .map((mark, i, a) =>
                              <span key={mark.id}>
@@ -138,7 +153,8 @@ Class.propTypes = {
   marks: PropTypes.object.isRequired,
   teacher: PropTypes.object.isRequired,
   postMark: PropTypes.func.isRequired,
-  putMark: PropTypes.func.isRequired
+  putMark: PropTypes.func.isRequired,
+  goToForbidden: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Class)

@@ -2,8 +2,12 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import classStyles from './Class.css'
+import routesActions from '../actions/routes'
 
-const mapStateToProps = ({ subjects, marks, student }) => ({ subjects, marks, student })
+const mapStateToProps = ({ me, subjects, marks, student }) => ({ me, subjects, marks, student })
+const mapDispatchToProps = dispatch => ({
+  goToForbidden: () => dispatch(routesActions.goToForbidden())
+})
 
 class StudentMarks extends React.Component {
   constructor(props){
@@ -19,6 +23,10 @@ class StudentMarks extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState){
     if (nextProps.marks.data && nextProps.subjects.data && nextProps.student.data)
       return StudentMarks.transformProps(nextProps, prevState)
+    if (nextProps.me.data && nextProps.me.data.role !== 'student') {
+      nextProps.goToForbidden()
+      return null
+    }
     return null
   }
 
@@ -100,7 +108,8 @@ class StudentMarks extends React.Component {
 StudentMarks.propTypes = {
   subjects: PropTypes.object.isRequired,
   marks: PropTypes.object.isRequired,
-  student: PropTypes.object.isRequired
+  student: PropTypes.object.isRequired,
+  goToForbidden: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps, null)(StudentMarks)
+export default connect(mapStateToProps, mapDispatchToProps)(StudentMarks)

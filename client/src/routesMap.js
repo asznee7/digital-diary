@@ -14,15 +14,14 @@ export default {
   },
   CLASSES: {
     path: '/classes',
-    thunk: (dispatch, getState) => {
-      dispatch(marks.getMarks())
-    }
+    thunk: (dispatch, getState) => {}
   },
   CLASS: {
     path: '/classes/:id',
     thunk: (dispatch, getState) => {
       const { id } = getState().location.payload
       dispatch(classes.getClass(id))
+      dispatch(marks.getMarks())
     }
   },
   STUDENT_CLASS: {

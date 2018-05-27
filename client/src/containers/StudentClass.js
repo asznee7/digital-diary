@@ -3,10 +3,13 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import classes from '../thunks/classes'
 import styles from './Classes.css'
+import routesActions from '../actions/routes'
 
-const mapStateToProps = ({ student, class: loadedClass }) => ({ student, loadedClass })
+const mapStateToProps = ({ me, student, class: loadedClass }) => ({ me, student, loadedClass })
+
 const mapDispatchToProps = dispatch => ({
-  getClass: (id) => dispatch(classes.getClass(id))
+  getClass: (id) => dispatch(classes.getClass(id)),
+  goToForbidden: () => dispatch(routesActions.goToForbidden())
 })
 
 class StudentClass extends React.Component {
@@ -23,7 +26,7 @@ class StudentClass extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState){
     if (!prevState.fetched && nextProps.student.data && !nextProps.loadedClass.data) {
       nextProps.getClass(nextProps.student.data.class.id)
-      return { student: nextProps.student, fetched: true }
+      return { student: nextProps.student.data, fetched: true }
     }
     if (nextProps.loadedClass.data){
       return {
@@ -31,6 +34,10 @@ class StudentClass extends React.Component {
         students: nextProps.loadedClass.data.students
           .sort((a, b) => a.name.toUpperCase() < b.name.toUpperCase() ?  -1 :  1)
       }
+    }
+    if (nextProps.me.data && nextProps.me.data.role !== 'student') {
+      nextProps.goToForbidden()
+      return null
     }
     return null
   }
@@ -40,7 +47,7 @@ class StudentClass extends React.Component {
     let filteredStudents = students.filter(classEntity =>
       classEntity.name.toLowerCase().includes(e.target.value.toLowerCase()))
     this.setState({
-      searchItem: e.target.value,
+      searchData: e.target.value,
       students: filteredStudents.sort((a, b) => a.name.toUpperCase() < b.name.toUpperCase() ?  -1 :  1)
     })
   }
@@ -74,7 +81,8 @@ class StudentClass extends React.Component {
 StudentClass.propTypes = {
   student: PropTypes.object.isRequired,
   loadedClass: PropTypes.object.isRequired,
-  getClass: PropTypes.func.isRequired
+  getClass: PropTypes.func.isRequired,
+  goToForbidden: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentClass)

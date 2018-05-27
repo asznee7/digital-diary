@@ -56,6 +56,11 @@ html, body, #root{
     font-size: 20px;
 }
 
+.error-go-back-link {
+    color: blue;
+    cursor: pointer;
+}
+
 input[type="submit"].button-primary[disabled]{
     background: #ccc;
     border-color: #ccc;

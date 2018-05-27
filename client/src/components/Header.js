@@ -27,7 +27,7 @@ class Header extends Component {
       return null
     }
 
-    if (!nextProps.me.data) {
+    if (!nextProps.me.data && nextProps.me.error) {
       nextProps.goToLogin()
     }
 
