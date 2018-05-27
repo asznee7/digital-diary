@@ -5,9 +5,11 @@ import { routes } from '../constants'
 
 export default {
   goToForbidden: createAction(routes.FORBIDDEN),
-  goToLogin: createAction(routes.ROUTE_LOGIN),
-  goToMain: createAction(routes.ROUTE_MAIN),
-  goToClasses: createAction(routes.ROUTE_CLASSES),
-  goToClass: createAction(routes.ROUTE_CLASS, id => ({ id })),
-  goToNotFound: createAction(NOT_FOUND)
+  goToLogin: createAction(routes.LOGIN),
+  goToMain: createAction(routes.MAIN),
+  goToClasses: createAction(routes.CLASSES),
+  goToClass: createAction(routes.CLASS, id => ({ id })),
+  goToNotFound: createAction(NOT_FOUND),
+  goToStudentClass: createAction(routes.STUDENT_CLASS),
+  goToStudentMarks: createAction(routes.STUDENT_MARKS)
 }

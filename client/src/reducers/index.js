@@ -10,6 +10,7 @@ import { classes, oneClass } from './classes'
 import { students, student } from './students'
 import { marks, mark, postMark, putMark } from './marks'
 import { teachers, teacher } from './teachers'
+import { subjects, subject } from './subjects'
 
 const history = createHistory()
 
@@ -29,7 +30,9 @@ const appReducer = combineReducers({
   lastSentMark: postMark,
   lastUpdatedMark: putMark,
   teachers,
-  teacher
+  teacher,
+  subjects,
+  subject
 })
 
 const rootReducer = (state, action) => {

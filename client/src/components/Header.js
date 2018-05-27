@@ -11,7 +11,9 @@ const mapDispatchToProps = (dispatch) => ({
   goToMain: () => dispatch(routesActions.goToMain()),
   goToClasses: () => dispatch(routesActions.goToClasses()),
   goToLogin: () => dispatch(routesActions.goToLogin()),
-  logout: () => dispatch(security.logout())
+  logout: () => dispatch(security.logout()),
+  goToStudentClass: () => dispatch(routesActions.goToStudentClass()),
+  goToStudentMarks: () => dispatch(routesActions.goToStudentMarks())
 })
 
 class Header extends Component {
@@ -43,7 +45,17 @@ class Header extends Component {
           <h3 onClick={this.props.goToMain}>Digital Diary</h3>
         </div>
         <div className={styles.menu}>
-          <span onClick={this.props.goToClasses}>Classes</span>
+          {
+            this.props.me.data && this.props.me.data.role === 'teacher' &&
+            <span onClick={this.props.goToClasses}>Classes</span>
+          }
+          {
+            this.props.me.data && this.props.me.data.role === 'student' &&
+            [
+              <span key='class' onClick={this.props.goToStudentClass}>My class</span>,
+              <span key='marks' onClick={this.props.goToStudentMarks}>Marks</span>
+            ]
+          }
         </div>
         <div className={styles.user}>
           <span className={styles.userInfo}>{this.props.me.data && this.props.me.data.name}</span>

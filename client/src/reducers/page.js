@@ -5,19 +5,23 @@ const initialState = 'Main'
 
 const {
   FORBIDDEN,
-  ROUTE_LOGIN,
-  ROUTE_MAIN,
-  ROUTE_CLASSES,
-  ROUTE_CLASS
+  LOGIN,
+  MAIN,
+  CLASSES,
+  CLASS,
+  STUDENT_CLASS,
+  STUDENT_MARKS
 } = routes
 
 const components = {
-  [ROUTE_CLASS]: 'Class',
-  [ROUTE_CLASSES]: 'Classes',
-  [ROUTE_LOGIN]: 'Login',
-  [ROUTE_MAIN]: 'Main',
+  [CLASS]: 'Class',
+  [CLASSES]: 'Classes',
+  [LOGIN]: 'Login',
+  [MAIN]: 'Main',
   [NOT_FOUND]: 'NotFound',
-  [FORBIDDEN]: 'Forbidden'
+  [FORBIDDEN]: 'Forbidden',
+  [STUDENT_CLASS]: 'StudentClass',
+  [STUDENT_MARKS]: 'StudentMarks'
 }
 
 export default (state = initialState, action) => components[action.type] || state

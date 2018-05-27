@@ -1,9 +1,11 @@
 export const routes = {
   FORBIDDEN: 'FORBIDDEN',
-  ROUTE_LOGIN: 'LOGIN',
-  ROUTE_MAIN: 'MAIN',
-  ROUTE_CLASSES: 'CLASSES',
-  ROUTE_CLASS: 'CLASS'
+  LOGIN: 'LOGIN',
+  MAIN: 'MAIN',
+  CLASSES: 'CLASSES',
+  CLASS: 'CLASS',
+  STUDENT_CLASS: 'STUDENT_CLASS',
+  STUDENT_MARKS: 'STUDENT_MARKS'
 }
 
 export const security = {
@@ -60,6 +62,15 @@ export const teachers = {
   GET_TEACHER_FAILURE: 'GET_TEACHER_FAILURE'
 }
 
+export const subjects = {
+  GET_SUBJECTS_REQUEST: 'GET_SUBJECTS_REQUEST',
+  GET_SUBJECTS_SUCCESS: 'GET_SUBJECTS_SUCCESS',
+  GET_SUBJECTS_FAILURE: 'GET_SUBJECTS_FAILURE',
+  GET_SUBJECT_REQUEST: 'GET_SUBJECT_REQUEST',
+  GET_SUBJECT_SUCCESS: 'GET_SUBJECT_SUCCESS',
+  GET_SUBJECT_FAILURE: 'GET_SUBJECT_FAILURE'
+}
+
 export default {
   routes,
   security,
@@ -67,5 +78,6 @@ export default {
   classes,
   students,
   marks,
-  teachers
+  teachers,
+  subjects
 }

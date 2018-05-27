@@ -1,5 +1,6 @@
 import { getMeRequest, getMeSuccess, getMeFailure } from '../actions/users'
 import teachers from './teachers'
+import students from './students'
 import users from '../api/users'
 import { redirect } from 'redux-first-router'
 
@@ -9,8 +10,14 @@ const getMe = () => dispatch => {
     .then((response) => {
       dispatch(getMeSuccess(response.data))
       const { id, role } = response.data
-      if(role && role === 'teacher'){
-        dispatch(teachers.getTeacher(id))
+      switch (role) {
+        case 'teacher':
+          dispatch(teachers.getTeacher(id))
+          break
+        case 'student':
+          dispatch(students.getStudent(id))
+          break
+        default:
       }
     })
     .catch((e) => {

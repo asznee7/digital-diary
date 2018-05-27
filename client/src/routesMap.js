@@ -1,5 +1,6 @@
 import classes from './thunks/classes'
 import marks from './thunks/marks'
+import subjects from './thunks/subjects'
 
 export default {
   FORBIDDEN: '/forbidden',
@@ -9,8 +10,7 @@ export default {
   },
   MAIN: {
     path: '/',
-    thunk: (dispatch, getState) => {
-    }
+    thunk: (dispatch, getState) => {}
   },
   CLASSES: {
     path: '/classes',
@@ -25,4 +25,15 @@ export default {
       dispatch(classes.getClass(id))
     }
   },
+  STUDENT_CLASS: {
+    path: '/class',
+    thunk: (dispatch, getState) => {}
+  },
+  STUDENT_MARKS: {
+    path: '/marks',
+    thunk: (dispatch, getState) => {
+      dispatch(subjects.getSubjects())
+      dispatch(marks.getMarks())
+    }
+  }
 }
