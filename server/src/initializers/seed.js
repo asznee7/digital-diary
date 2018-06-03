@@ -74,8 +74,8 @@ const initializerSeed = async () => {
     if (subjects.length > i) {
       await subjects[i].setTeachers(teachers[i])
     }
-    for (let j = 0; k < classes.length; j++) {
-      if (Math.random() < 0.7) {
+    for (let j = 0; j < classes.length; j++) {
+      if (Math.random() < 0.9) {
         await teachers[i].setClasses(classes[j])
       }
     }
