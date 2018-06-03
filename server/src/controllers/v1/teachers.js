@@ -10,7 +10,7 @@ const { validateMiddleware, asyncMiddleware, checkAuthenticated } = require('../
 const router = new express.Router()
 
 router.get('/',
-  checkAuthenticated(),
+  checkAuthenticated([ Teacher ]),
   validateMiddleware('emptySchema'),
   asyncMiddleware(async (req, res) => {
     const teachers = await Teacher.findAndCountAll({

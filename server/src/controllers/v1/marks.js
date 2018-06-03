@@ -9,7 +9,7 @@ const { NotFoundError } = require('../../errors')
 const router = new express.Router()
 
 router.get('/',
-  checkAuthenticated(),
+  checkAuthenticated([ Student, Teacher ]),
   validateMiddleware('emptySchema'),
   asyncMiddleware(async (req, res) => {
     const marks = await Mark.findAndCountAll({
@@ -28,7 +28,7 @@ router.get('/',
 )
 
 router.get('/:id(\\d+)',
-  checkAuthenticated(),
+  checkAuthenticated([ Student, Teacher ]),
   validateMiddleware('emptySchemaWithId'),
   asyncMiddleware(async (req, res) => {
     const mark = await Mark.findById(req.params.id, {

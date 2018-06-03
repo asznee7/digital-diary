@@ -5,12 +5,14 @@ export const notificationOptionsError = message => ({
   title: 'Error',
   message: message,
   autoDismiss: 10,
+  position: 'br'
 })
 
 export const notificationOptionsSuccess = message => ({
   title: 'Success',
   message: message,
   autoDismiss: 10,
+  position: 'br'
 })
 
 const style = {
@@ -21,9 +23,11 @@ const style = {
   }
 }
 
-export default Notification = ({ notifications }) => (
+const Notification = ({ notifications }) => (
   <Notifications
     notifications={notifications}
     style={style}
   />
 )
+
+export default Notification

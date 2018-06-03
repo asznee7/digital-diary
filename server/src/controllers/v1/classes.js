@@ -1,7 +1,7 @@
 'use strict'
 
 const express = require('express')
-const { Class, Student, User } = require('../../models')
+const { Class, Student, User, Teacher } = require('../../models')
 const { mapList, mapClassCore, mapClassExtended } = require('../../utils/entity-mappers')
 const { database: databaseLogger } = require('../../utils/logger')
 const { NotFoundError } = require('../../errors')
@@ -22,7 +22,7 @@ router.get('/',
 )
 
 router.get('/:id(\\d+)',
-  checkAuthenticated(),
+  checkAuthenticated([ Student, Teacher ]),
   validateMiddleware('emptySchemaWithId'),
   asyncMiddleware(async (req, res) => {
     const classEntity = await Class.findById(req.params.id, {
