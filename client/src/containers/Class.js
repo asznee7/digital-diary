@@ -7,7 +7,7 @@ import Dropdown from '../utils/Dropdown'
 import marks from '../thunks/marks'
 import routesActions from '../actions/routes'
 
-const mapStateToProps = ({ class: loadedClass, marks, teacher, me}) => ({ loadedClass, marks, teacher, me })
+const mapStateToProps = ({class: loadedClass, marks, teacher, me, location }) => ({ loadedClass, marks, teacher, me, location })
 const mapDispatchToProps = dispatch => ({
   postMark: (data) => dispatch(marks.postMark(data)),
   putMark: (id, data) => dispatch(marks.putMark(id, data)),
@@ -26,12 +26,17 @@ class Class extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState){
-    if (nextProps.loadedClass.data && nextProps.marks.data && nextProps.teacher.data) {
-      return Class.getMarksTable(nextProps, prevState)
-    }
     if (nextProps.me.data && nextProps.me.data.role !== 'teacher') {
       nextProps.goToForbidden()
       return null
+    }
+    if (nextProps.teacher.data && nextProps.loadedClass.data &&
+      !nextProps.teacher.data.classes.map(c => c.id).includes(nextProps.loadedClass.data.id)) {
+        nextProps.goToForbidden()
+        return null
+    }
+    if (nextProps.loadedClass.data && nextProps.marks.data && nextProps.teacher.data) {
+      return Class.getMarksTable(nextProps, prevState)
     }
     return null
   }
@@ -82,12 +87,11 @@ class Class extends React.Component {
     this.props.putMark(id, { value })
   }
 
-  renderRows = (dates, filteredStudents, loadedClass) => {
-    if (!dates || filteredStudents || loadedClass) return null
-  }
-
   render () {
-    console.log(this.state)
+    // prevent flickering
+    if (this.props.loadedClass.data && this.props.location.payload.id !== this.props.loadedClass.data.id)
+      return null
+
     const { dates, filteredStudents, loadedClass } = this.state
     return (
       <div>

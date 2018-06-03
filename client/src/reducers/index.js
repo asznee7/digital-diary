@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { connectRoutes } from 'redux-first-router'
 import { reducer as formReducer } from 'redux-form'
-
+import { reducer as notifications } from 'react-notification-system-redux';
 import createHistory from 'history/createBrowserHistory'
 import routesMap from '../routesMap'
 import page from './page'
@@ -32,7 +32,8 @@ const appReducer = combineReducers({
   teachers,
   teacher,
   subjects,
-  subject
+  subject,
+  notifications
 })
 
 const rootReducer = (state, action) => {

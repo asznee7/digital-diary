@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 
 import Header from '../components/Header'
 import Switcher from '../components/Switcher'
+import Notification from '../utils/notifications'
 import users from '../thunks/users'
 
-const mapStateToProps = ({ me }) => ({ me })
-
+const mapStateToProps = ({ me, notifications }) => ({ me, notifications })
 const mapDispatchToProps = (dispatch) => ({
   getMe: () => dispatch(users.getMe())
 })
@@ -22,6 +22,7 @@ class Root extends React.Component {
       <div>
         <Header />
         <Switcher />
+        <Notification notifications={this.props.notifications} />
       </div>
     )
   }

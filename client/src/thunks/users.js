@@ -3,11 +3,13 @@ import teachers from './teachers'
 import students from './students'
 import users from '../api/users'
 import { redirect } from 'redux-first-router'
+import { error } from 'react-notification-system-redux'
+import { notificationOptionsError } from '../utils/notifications'
 
 const getMe = () => dispatch => {
   dispatch(getMeRequest())
   users.getMe()
-    .then((response) => {
+    .then(response => {
       dispatch(getMeSuccess(response.data))
       const { id, role } = response.data
       switch (role) {
@@ -20,9 +22,12 @@ const getMe = () => dispatch => {
         default:
       }
     })
-    .catch((e) => {
+    .catch(e => {
       dispatch(getMeFailure(e))
-      //todo handle 401 error
+      if (e.response)
+        dispatch(error(notificationOptionsError(e.response.data.message)))
+      else
+        dispatch(error(notificationOptionsError(e.message)))
       dispatch(redirect({ type: 'LOGIN' }))
     })
 }

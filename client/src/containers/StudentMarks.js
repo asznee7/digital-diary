@@ -66,8 +66,8 @@ class StudentMarks extends React.Component {
                     .filter(mark => mark.date === date && mark.subject.id === subject.id)
                     .map((mark, i, a) =>
                       <span key={i}>
-                                    {mark.value}{i < a.length - 1 ? ' / ' : ''}
-                                  </span>
+                        {mark.value}{i < a.length - 1 ? ' / ' : ''}
+                      </span>
                     )
                 }
               </div>
