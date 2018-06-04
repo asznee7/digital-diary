@@ -37,18 +37,16 @@ class StudentMarks extends React.Component {
 
     let filteredMarks = marks.filter(mark => mark.student.id === student.id)
     let dates = [...new Set(filteredMarks.map(mark => mark.date))].sort((a, b) => a.toUpperCase() < b.toUpperCase() ?  -1 :  1)
-    let filteredSubjects = subjects.sort((a, b) => a.name.toUpperCase() < b.name.toUpperCase() ?  -1 :  1)
+    let filteredSubjects = subjects
+      .sort((a, b) => a.name.toUpperCase() < b.name.toUpperCase() ?  -1 :  1)
+      .filter(i => i.name.toLowerCase().includes(state.searchData.toLowerCase()))
 
     return { dates, filteredMarks, filteredSubjects }
   }
 
   onChange = (e) => {
-    const { entities : subjects } = this.props.subjects.data
-    let filteredSubjects = subjects.filter(entitiy =>
-      entitiy.name.toLowerCase().includes(e.target.value.toLowerCase()))
     this.setState({
-      searchData: e.target.value,
-      filteredSubjects
+      searchData: e.target.value
     })
   }
 

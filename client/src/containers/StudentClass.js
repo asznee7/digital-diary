@@ -16,7 +16,7 @@ class StudentClass extends React.Component {
   constructor(){
     super()
     this.state = {
-      searchItem: '',
+      searchData: '',
       student: {},
       students: [],
       fetched: false
@@ -29,9 +29,11 @@ class StudentClass extends React.Component {
       return { student: nextProps.student.data, fetched: true }
     }
     if (nextProps.loadedClass.data){
+      console.log(nextProps.loadedClass.data)
       return {
         student: nextProps.student.data,
         students: nextProps.loadedClass.data.students
+          .filter(i => i.name.toLowerCase().includes(prevState.searchData.toLowerCase()))
           .sort((a, b) => a.name.toUpperCase() < b.name.toUpperCase() ?  -1 :  1)
       }
     }
@@ -43,12 +45,8 @@ class StudentClass extends React.Component {
   }
 
   onChange = (e) => {
-    const { students } = this.props.loadedClass.data
-    let filteredStudents = students.filter(classEntity =>
-      classEntity.name.toLowerCase().includes(e.target.value.toLowerCase()))
     this.setState({
-      searchData: e.target.value,
-      students: filteredStudents.sort((a, b) => a.name.toUpperCase() < b.name.toUpperCase() ?  -1 :  1)
+      searchData: e.target.value
     })
   }
 

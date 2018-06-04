@@ -42,13 +42,8 @@ class Class extends React.Component {
   }
 
   onChange = (e) => {
-    const { students } = this.props.loadedClass.data
-    let filteredStudents = students
-      .filter(entity => entity.name.toLowerCase().includes(e.target.value.toLowerCase()))
-      .sort((a, b) => a.name.toUpperCase() < b.name.toUpperCase() ?  -1 :  1)
     this.setState({
-      searchData: e.target.value,
-      filteredStudents
+      searchData: e.target.value
     })
   }
 

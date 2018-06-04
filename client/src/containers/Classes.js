@@ -33,6 +33,7 @@ class Classes extends React.Component {
       return {
         teacher: nextProps.teacher.data,
         classes: nextProps.classes.data.entities
+          .filter(i => i.name.toLowerCase().includes(prevState.searchData.toLowerCase()))
           .sort((a, b) => a.name.toUpperCase() < b.name.toUpperCase() ?  -1 :  1)
       }
     }
@@ -57,12 +58,8 @@ class Classes extends React.Component {
   }
 
   onChange = (e) => {
-    const { entities } = this.props.classes.data
-    let classes = entities.filter(classEntity =>
-      classEntity.name.toLowerCase().includes(e.target.value.toLowerCase()))
     this.setState({
-      searchData: e.target.value,
-      classes: classes.sort((a, b) => a.name.toUpperCase() < b.name.toUpperCase() ?  -1 :  1)
+      searchData: e.target.value
     })
   }
 
