@@ -1,5 +1,10 @@
 'use strict'
 
+const { Teacher, Student } = require('../models')
+const config = require('config')
+const { InternalServerError } = require('../errors')
+const roles = config.get('security.roles')
+
 const mapList = (mapEntityFn) => ({count, rows}) => ({
   count,
   entities: rows.map(mapEntityFn)
@@ -50,11 +55,6 @@ const mapMarkCore = ({ id, value, created_at, Student, Subject }) => ({
   class: mapClassCore(Student.Class),
   subject: mapSubjectCore(Subject)
 })
-
-const { Teacher, Student } = require('../models')
-const config = require('config')
-const { InternalServerError } = require('../errors')
-const roles = config.get('security.roles')
 
 const mapUserRole = (modelInstance) => {
   if (modelInstance instanceof Teacher) {
